@@ -1,2 +1,2 @@
 # LLM-jh-GPT
-LLM-jhGPT is a large language model generative Pre-trained Transformer (a form of AI) using neural networks and transformer architecture to generate human-like text.
+A Generative Pre-trained Transformer (GPT) is a type of artificial intelligence that understands and generates human-like text. We will be using the PyTorch.nn (Neural network) library which houses transformer architecture. The goal of jhGPT is to generate linguistic text similar to the capabilities of humans. Ultimately, we want the model to produce undifferentiable text (compared to a human). The model will have a range of languages, initially starting with English, and then moving forwards to other languages. 
