@@ -9,6 +9,7 @@ eval_interval = 300
 learning_rate = 1e-2
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 eval_iters = 200
+n_embd = 32
 
 torch.manual_seed(1)
 
@@ -62,15 +63,24 @@ def estimate_loss():
 
 class BigramLanguageModel(nn.Module):
 
-    def __init__(self, vocab_size):
+    def __init__(self):
         super().__init__()
         # each token directly reads off the logits for the next token from a lookup table
-        self.token_embedding_table = nn.Embedding(vocab_size, vocab_size)
+        self.token_embedding_table = nn.Embedding(vocab_size, n_embd)
+        self.position_embedding_table = nn.Embedding(block_size, n_embd)
+        self.lm_head = nn.Linear(n_embd, vocab_size)
 
     def forward(self, idx, targets = None):
-        #idx and targets are both (B, T) tensors of integers
+        B, T = idx.shape
 
-        logits = self.token_embedding_table(idx) # (B, T, C)
+        if T > block_size:
+            raise ValueError(f"Sequence length T={T} exceeds block_size={block_size}")
+
+        #idx and targets are both (B, T) tensors of integers
+        tok_emb = self.token_embedding_table(idx) # (B, T, C)
+        pos_emb = self.position_embedding_table(torch.arange(T, device = device)) # (T, C)
+        x = tok_emb + pos_emb
+        logits = self.lm_head(x) # (B, T, vocab_size)
 
         if targets is None:
             loss = None
@@ -81,7 +91,7 @@ class BigramLanguageModel(nn.Module):
             loss = F.cross_entropy(logits, targets)
 
         return logits, loss
-    
+        
     def generate(self, idx, max_new_tokens):
         # idx is (B, T) array of indices in the current context
         for _ in range(max_new_tokens):
@@ -97,7 +107,7 @@ class BigramLanguageModel(nn.Module):
             idx = torch.cat((idx, idx_next), dim = 1) # (B, T + 1)
         return idx
 
-model = BigramLanguageModel(vocab_size)
+model = BigramLanguageModel()
 m = model.to(device)
 
 # create a PyTorch optimizer
@@ -120,18 +130,27 @@ for iter in range(max_iters):
 context = torch.zeros((1, 1), dtype = torch.long, device = device)
 print(decode(m.generate(context, max_new_tokens = 500)[0].tolist()))
 
-B, T, C = 4, 8, 2 # batch, time, channels
+B, T, C = 4, 8, 32 # batch, time, channels
 x = torch.randn(B, T, C)
 
-xbow = torch.zeros((B, T, C))
-for b in range(B):
-    for t in range(T):
-        xprev = x[b, : t + 1] # (t, C)
-        xbow[b, t] = torch.mean(xprev, 0)
+#a single head to preform self-attention
+head_size = 16
+key = nn.Linear(C, head_size, bias = False)
+query = nn.Linear(C, head_size, bias = False)
+value = nn.Linear(C, head_size, bias = False)
+k = key(x) # (B, T, 16)
+q = query(x) # (B, T, 16)
+wei = q @ k.transpose(-2, -1) # (B, T, 16) @ (B, 16, T) --> (B, T, T)
 
 tril = torch.tril(torch.ones(T, T))
 wei = torch.zeros((T, T))
 wei = wei.masked_fill(tril == 0, float('-inf'))
 wei = F.softmax(wei, dim = -1)
-xbow3 = wei @ x # (T, T) @ (B, T, C) --> (B, T, C)
-torch.allclose(xbow, xbow3)
+
+v = value(x)
+
+out = wei @ v
+
+# out = wei @ x # (T, T) @ (B, T, C) --> (B, T, C)
+
+print(out)
