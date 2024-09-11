@@ -4,11 +4,11 @@ from torch.nn import functional as F
 
 """ MUST BE RUN ON GPU, IF NOT, DECREASE n_layer, n_embd, and other variables """
 
-batch_size = 64 # how many independent sequences will we process in parallel?
-block_size = 256 # what is the maxmimum context length for predictions
-max_iters = 5000
+batch_size = 32 # how many independent sequences will we process in parallel?
+block_size = 8 # what is the maxmimum context length for predictions
+max_iters = 3000
 eval_interval = 300
-learning_rate = 3e-4
+learning_rate = 1e-3
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 eval_iters = 200
 n_embd = 384
