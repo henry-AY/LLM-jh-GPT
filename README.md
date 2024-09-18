@@ -8,12 +8,7 @@ A <ins>Generative Pre-trained Transformer</ins> (GPT) is a type of artificial in
 
 The picture above is the transformer architecture as described and depicted in <a href="https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf"><i>Attention Is All You Need</i></a>. In essence, a transformer is a type of artificial intelligence model that learns and analyzes patterns in heaps of data to generate new output. Transformers are a current cutting-edge natural language processing (NLP) model relying on a different type of encoder-decoder architecture. Previous encoder-decoder architectures relied mainly on Recurrent Neural Networks (RNNs), however, Transformers can entirely remove said recurrence.
 
-
-$\color{#FF7F7F}{Step 1 - Input Embeddings}$
-
-$\textcolor{#FF7F7F}{Step 1 - Input+Embeddings}$
-
-### Encoder Workflow
+### <ins>Encoder Workflow</ins>
 
 The figure below (the left half of the transformer) is the Encoder.
 <p align="center">
@@ -28,7 +23,7 @@ It is important to note that the embedding process only happens in the bottom-mo
 
 
 
-### Decoder Workflow
+### <ins>Decoder Workflow</ins>
 
 The figure below (the right half of the transformer) is the Decoder
 <p align="center">
