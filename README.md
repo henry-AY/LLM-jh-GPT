@@ -17,9 +17,29 @@ The figure below (the left half of the transformer) is the Encoder.
 
 #### Step 1 - Input Embeddings
 
-It is important to note that the embedding process only happens in the bottom-most encoder, not each encoder. The encoder begins by converting the input into tokens--words, subwords, or characters--into vectors using embedding layers. The embeddings capture the semantic meaning of the tokens and convert them into numerical vectors.
+It is important to note that the embedding process only happens in the bottom-most encoder, not each encoder. The encoder begins by converting the input into tokens--words, subwords, or characters--into vectors using embedding layers. The embeddings > capture the semantic meaning of the tokens and convert them into numerical vectors.
 
 #### Step 2 - Positional Encoding
+
+Because Transformers lack a recurrence mechanism such as Recurrent Neural Networks (RNNs), a mathematical approach must be applied to introduce position-specific patterns to each token in a sequence. This process is called 'Positional Encoding', where a combination of sine and cosine functions are used to create a positional vector.
+
+##### <ins>Positional Encoding using Sine</ins>
+$\ PE(\text{pos}, 2i) = \sin \left( \frac{\text{pos}}{10000 \cdot \left( \frac{2i}{d_{\text{model}}} \right)} \right) \$
+
+```
+PE\left(pos,\ 2i\right)\ =\sin\left(\frac{pos}{10000\left(\frac{2i}{d_{model}}\right)}\right)
+```
+
+##### <ins>Positional Encoding using Cosine</ins>
+$\ PE(\text{pos}, 2i + 1) = \cos \left( \frac{\text{pos}}{10000 \cdot \left( \frac{2i}{d_{\text{model}}} \right)} \right) \$
+
+```
+PE\left(pos,\ 2i\ +\ 1\right)\ =\cos\left(\frac{pos}{10000\left(\frac{2i}{d_{model}}\right)}\right)
+```
+
+The equations and process of positional encoding will be further detailed and explored in <i>Fundamentals of jh-GPT - A Deep-Dive into a Transformer-Based Language Model</i>
+
+#### Step 3 - Multi-Headed Attention
 
 
 
