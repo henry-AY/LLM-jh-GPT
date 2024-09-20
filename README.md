@@ -37,11 +37,18 @@ $\ PE(\text{pos}, 2i + 1) = \cos \left( \frac{\text{pos}}{10000 \cdot \left( \fr
 PE\left(pos,\ 2i\ +\ 1\right)\ =\cos\left(\frac{pos}{10000\left(\frac{2i}{d_{model}}\right)}\right)
 ```
 
-The equations and process of positional encoding will be further detailed and explored in <i>Fundamentals of jh-GPT - A Deep-Dive into a Transformer-Based Language Model</i>
+The equations and process of positional encoding will be further detailed and explored in <i>Fundamentals of jh-GPT - A Deep-Dive into a Transformer-Based Language Model</i>.
 
-#### Step 3 - Multi-Headed Attention
+#### Step 3 - Multi-Headed Self-Attention
 
+The encoder utilizes a specialized attention mechanism known as self-attention. Self-attention is how the model relates each word in the input with other words. This step differs for each model, as some are token, word, or character-based (jhGPT is a character-based encoder). 
 
+This mechanism allows the encoder to concentrate on various parts of the input sequence while processing each token. Attention scores are calculated based on a query, key, and value concept (QKV). A QKV is analogous to a basic retrieval system that is most likely used in numerous websites you use daily.
+* <b>Query:</b> A vector that represents a token from the input sequence in the attention mechanism.
+* <b>Key:</b> A vector in the attention mechanism that corresponds to each token in the input sequence.
+* <b>Value:</b> Each value is associated with a given key, and where value where the query and key have the highest attention score is the final output.
+
+<i>Fundamentals of jh-GPT - A Deep-Dive into a Transformer-Based Language Model</i> will provide a significantly more detailed cover of the self-attention mechanism.
 
 ### <ins>Decoder Workflow</ins>
 
