@@ -50,6 +50,10 @@ This mechanism allows the encoder to concentrate on various parts of the input s
 
 <i>Fundamentals of jh-GPT - A Deep-Dive into a Transformer-Based Language Model</i> will provide a significantly more detailed cover of the self-attention mechanism.
 
+#### Step 4 - Output of the Encoder
+
+
+
 ### <ins>Decoder Workflow</ins>
 
 The figure below (the right half of the transformer) is the Decoder
