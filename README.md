@@ -52,7 +52,7 @@ This mechanism allows the encoder to concentrate on various parts of the input s
 
 #### Step 4 - Output of the Encoder
 
-
+The final encoder layer outputs a set of vectors, each representing a deep contextual understanding of the input sequence. These output vectors are passed in as the input for the decoder in a Transformer model. The process of encoding 'paves the path' for the decoder, to produce a based on the words, tokens, or characters with the highest attention. Moreover, a unique characteristic of the encoder, is you can have <i>N</i> encoder layers. Each layer is an independent neural network per se, which can explore and learn unique sides of attention, resulting in a significantly more diverse conclusion.
 
 ### <ins>Decoder Workflow</ins>
 
@@ -60,3 +60,5 @@ The figure below (the right half of the transformer) is the Decoder
 <p align="center">
   <img src="https://github.com/Hy8012/LLM-jh-GPT/blob/main/md_files/Decoder_Transformer.png?raw=true" width ="200" height="675"/>
 </p>
+
+The decoder is specifically structured and designed to generate an output by decoding the encoder output. 
