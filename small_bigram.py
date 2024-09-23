@@ -19,7 +19,7 @@ dropout = 0.2 # 20% of all intermediate calculations are dropped to 0
 torch.manual_seed(1)
 
 
-with open('/Users/henry/git_LLM-jh-GPT/LLM-jh-GPT/English/AI_english_input.txt', 'r', encoding='utf-8') as f:
+with open('English/AI_english_input.txt', 'r', encoding='utf-8') as f:
     text = f.read()
 
 # temp
