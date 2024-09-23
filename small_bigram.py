@@ -19,7 +19,7 @@ dropout = 0.2 # 20% of all intermediate calculations are dropped to 0
 torch.manual_seed(1)
 
 
-with open('english_input_developed_by_AI.txt', 'r', encoding='utf-8') as f:
+with open('/Users/henry/git_LLM-jh-GPT/LLM-jh-GPT/English/AI_english_input.txt', 'r', encoding='utf-8') as f:
     text = f.read()
 
 # temp
@@ -212,3 +212,6 @@ for iter in range(max_iters):
 #generate from the model
 context = torch.zeros((1, 1), dtype = torch.long, device = device)
 print(decode(m.generate(context, max_new_tokens = 500)[0].tolist()))
+
+total_params = sum(p.numel() for p in model.parameters())
+print(f'Total number of parameters: {total_params}')
