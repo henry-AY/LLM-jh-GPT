@@ -2,8 +2,6 @@ import torch
 import torch.nn as nn
 from torch.nn import functional as F
 
-""" MUST BE RUN ON GPU, IF NOT, DECREASE n_layer, n_embd, and other variables """
-
 batch_size = 32 # how many independent sequences will we process in parallel?
 block_size = 8 # what is the maxmimum context length for predictions
 max_iters = 3000
@@ -19,7 +17,7 @@ dropout = 0.2 # 20% of all intermediate calculations are dropped to 0
 torch.manual_seed(1)
 
 
-with open('English/AI_english_input.txt', 'r', encoding='utf-8') as f:
+with open('English/WarAndPeace.txt', 'r', encoding='utf-8') as f:
     text = f.read()
 
 # temp
