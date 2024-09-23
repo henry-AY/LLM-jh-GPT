@@ -58,7 +58,7 @@ The final encoder layer outputs a set of vectors, each representing a deep conte
 
 The figure below (the right half of the transformer) is the Decoder
 <p align="center">
-  <img src="https://github.com/Hy8012/LLM-jh-GPT/blob/main/md_files/Decoder_Transformer.png?raw=true" width ="200" height="675"/>
+  <img src="https://github.com/Hy8012/LLM-jh-GPT/blob/main/md_files/Decoder_Transformer.png?raw=true" width="200" height="675"/>
 </p>
 
 The decoder in a Transformer model is responsible for generating text sequences and consists of sub-layers similar to the encoder, including two multi-headed attention layers, a pointwise feed-forward layer, residual connections, and layer normalization. Each multi-headed attention layer has a distinct function, and the decoding process concludes with a linear layer and softmax function to determine word probabilities.
@@ -76,6 +76,10 @@ After the embedding stage, the input is processed through a positional encoding 
 #### Step 3 - Multi-Headed Self-Attention
 
 This process resembles the self-attention mechanism in the encoder, but with an important distinction: it restricts positions from attending to future positions. As a result, each word in the sequence remains uninfluenced by future tokens.
+
+<p align="center">
+  <img src="https://github.com/Hy8012/LLM-jh-GPT/blob/main/md_files/Masked_Scores.png?raw=true" width="650" height="200"/>
+</p>
 
 The steps of the Linear Classifier and Softmax will be covered significantly more in-depth in <i>Fundamentals of jh-GPT - A Deep-Dive into a Transformer-Based Language Model</i>
 
