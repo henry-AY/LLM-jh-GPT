@@ -61,4 +61,26 @@ The figure below (the right half of the transformer) is the Decoder
   <img src="https://github.com/Hy8012/LLM-jh-GPT/blob/main/md_files/Decoder_Transformer.png?raw=true" width ="200" height="675"/>
 </p>
 
-The decoder is specifically structured and designed to generate an output by decoding the encoder output. 
+The decoder in a Transformer model is responsible for generating text sequences and consists of sub-layers similar to the encoder, including two multi-headed attention layers, a pointwise feed-forward layer, residual connections, and layer normalization. Each multi-headed attention layer has a distinct function, and the decoding process concludes with a linear layer and softmax function to determine word probabilities.
+
+Operating in an autoregressive manner, the decoder begins with a start token and utilizes previously generated outputs along with rich contextual information from the encoder. This decoding process continues until it produces a token that signifies the end of output generation.
+
+#### Step 1 - Output Embeddings
+
+At the beginning of the decoder's process, it closely resembles that of the encoder. In this stage, the input is first processed through an embedding layer.
+
+#### Step 2 - Positional Encoding
+
+After the embedding stage, the input is processed through a positional encoding layer, which generates positional embeddings. These embeddings are then directed into the first multi-head attention layer of the decoder, where attention scores specific to the decoder's input are calculated.
+
+#### Step 3 - Multi-Headed Self-Attention
+
+This process resembles the self-attention mechanism in the encoder, but with an important distinction: it restricts positions from attending to future positions. As a result, each word in the sequence remains uninfluenced by future tokens.
+
+The steps of the Linear Classifier and Softmax will be covered significantly more in-depth in <i>Fundamentals of jh-GPT - A Deep-Dive into a Transformer-Based Language Model</i>
+
+#### Step 4 - Output of the Decoder
+
+The output from the final layer is converted into a predicted sequence using a linear layer followed by a softmax function to produce probabilities for each word in the vocabulary.
+
+During operation, the decoder adds the newly generated output to its existing input list and continues the decoding process. This iterative cycle continues until the model identifies a specific token that indicates the end of the sequence. The token with the highest probability is designated as the final output, commonly represented by the end token.
