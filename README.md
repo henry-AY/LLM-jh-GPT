@@ -1,6 +1,6 @@
 # LLM-jh-GPT
 
-> Author(s): Henry Yost (Hy8012), Jessy Garcia (jgarc826)
+> Author(s): Henry Yost (henry-AY), Jessy Garcia (jgarc826)
 
 A <ins>Generative Pre-trained Transformer</ins> (GPT) is a type of artificial intelligence that understands and generates human-like text. We will be using the <a href="https://pytorch.org/docs/stable/nn.html"><ins>PyTorch.nn</a> (Neural network) library</ins> which houses transformer architecture. The goal of jhGPT is to output linguistic text similar to humans' capabilities. Ultimately, we want the model to produce undifferentiable text (compared to a human). The model will have a range of languages, initially starting with English, and then moving forward to other languages. The majority and basis of the architecture come from Andrej Karpathy's <a href="https://github.com/karpathy/nanoGPT">nanoGPT</a> GitHub repo, however, all analyses, and text files are independent and licensed uniquely.
 
