@@ -1,3 +1,5 @@
+import csv
+
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
@@ -5,7 +7,7 @@ from torch.nn import functional as F
 batch_size = 32 # how many independent sequences will we process in parallel?
 block_size = 8 # what is the maxmimum context length for predictions
 max_iters = 3000
-eval_interval = 300
+eval_interval = 1
 learning_rate = 1e-3
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 eval_iters = 200
@@ -15,7 +17,6 @@ n_layer = 6
 dropout = 0.2 # 20% of all intermediate calculations are dropped to 0
 
 torch.manual_seed(1)
-
 
 with open('English/WarAndPeace.txt', 'r', encoding='utf-8') as f:
     text = f.read()
@@ -194,18 +195,26 @@ m = model.to(device)
 # create a PyTorch optimizer
 optimizer = torch.optim.AdamW(model.parameters(), lr = learning_rate)
 
-for iter in range(max_iters):
-    if iter % eval_interval == 0:
-        losses = estimate_loss()
-        print(f"step {iter}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
-    #sample a batch of data
-    xb, yb = get_batch('train')
+# creating the csv file to hold the train loss and val loss data
+with open('trainloss_and_valloss.csv', 'w', newline='') as csv_out:
+    writer = csv.writer(csv_out)
+    writer.writerow(["t", "train loss", "val loss"])
 
-    #evaluate the loss
-    logits, loss = model(xb, yb)
-    optimizer.zero_grad(set_to_none = True)
-    loss.backward()
-    optimizer.step()
+    for iter in range(max_iters):
+        if iter % eval_interval == 0:
+            losses = estimate_loss()
+            print(f"step {iter}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}") # write to console
+            writer.writerow([iter, losses['train'], losses['val']]) # write to csv
+        #sample a batch of data
+        xb, yb = get_batch('train')
+
+        #evaluate the loss
+        logits, loss = model(xb, yb)
+        optimizer.zero_grad(set_to_none = True)
+        loss.backward()
+        optimizer.step()
+
+# csv_out will automatically close, because end of 'with' statement
 
 #generate from the model
 context = torch.zeros((1, 1), dtype = torch.long, device = device)
