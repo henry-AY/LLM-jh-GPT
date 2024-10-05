@@ -216,7 +216,7 @@ optimizer = torch.optim.AdamW(model.parameters(), lr = learning_rate)
 start_epoch, start_loss = load_checkpoint(checkpoint_path, model, optimizer)
 
 """ num epochs must be greater than the current epoch --> otherwise train.py will not run """
-num_epochs = 12
+num_epochs = 10
 
 for epoch in range(start_epoch, num_epochs):
     for iter in range(max_iters):
