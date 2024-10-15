@@ -22,8 +22,6 @@ model = BigramLanguageModel().to(device)
 model.load_state_dict(torch.load("model/final_model_weights.pth"))
 model.eval()
 
-print("here")
-
 def generate_token(token, max_tokens):
     input_ids = torch.tensor([encode(token)], dtype=torch.long).to(device)
     generated_ids = model.generate(input_ids, max_new_tokens=max_tokens)
@@ -32,7 +30,6 @@ def generate_token(token, max_tokens):
 output = generate_token("War and Peace", max_tokens=500)
 
 f = open('output.txt', 'a')
-f.write('Epoch: ' + model.epoch() + '\n')
 f.write(output + '\n\n')
 f.close()
 

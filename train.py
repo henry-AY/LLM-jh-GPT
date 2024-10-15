@@ -145,8 +145,6 @@ class BigramLanguageModel(nn.Module):
         self.ln_f = nn.LayerNorm(n_embd) # final layer norm
         self.lm_head = nn.Linear(n_embd, vocab_size)
 
-        self.epoch_count = 0
-
     def forward(self, idx, targets = None):
         B, T = idx.shape
 
@@ -183,12 +181,6 @@ class BigramLanguageModel(nn.Module):
             # append sampled index to the running sequence
             idx = torch.cat((idx, idx_next), dim = 1) # (B, T + 1)
         return idx
-    
-    def epoch(self):
-        return self.epoch_count
-    
-    def increment(self):
-        self.epoch_count += 1
 
 # Function to save checkpoint
 def save_checkpoint(model, optimizer, epoch, loss, path):
@@ -220,27 +212,31 @@ model = BigramLanguageModel().to(device)
 optimizer = torch.optim.AdamW(model.parameters(), lr = learning_rate)
 model.train()
 
-# Load checkpoint if exists
-start_epoch, start_loss = load_checkpoint(checkpoint_path, model, optimizer)
+def main():
+    # Load checkpoint if exists
+    start_epoch, start_loss = load_checkpoint(checkpoint_path, model, optimizer)
 
-""" num epochs must be greater than the current epoch --> otherwise train.py will not run """
-num_epochs = 25
+    """ num epochs must be greater than the current epoch --> otherwise train.py will not run """
+    num_epochs = 25
 
-for epoch in range(start_epoch, num_epochs):
-    for iter in range(max_iters):
-        #sample a batch of data
-        xb, yb = get_batch('train')
+    for epoch in range(start_epoch, num_epochs):
+        for iter in range(max_iters):
+            #sample a batch of data
+            xb, yb = get_batch('train')
 
-        #evaluate the loss
-        logits, loss = model(xb, yb)
-        optimizer.zero_grad(set_to_none = True)
-        loss.backward()
-        optimizer.step()
+            #evaluate the loss
+            logits, loss = model(xb, yb)
+            optimizer.zero_grad(set_to_none = True)
+            loss.backward()
+            optimizer.step()
 
-    save_checkpoint(model, optimizer, epoch, loss.item(), checkpoint_path)
+        save_checkpoint(model, optimizer, epoch, loss.item(), checkpoint_path)
 
-    losses = estimate_loss()
-    print(f"Epoch {epoch}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
+        losses = estimate_loss()
+        print(f"Epoch {epoch}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
 
-torch.save(model.state_dict(), "model/final_model_weights.pth")
-torch.save(optimizer.state_dict(), "model/final_model_optimizer.pth")
+    torch.save(model.state_dict(), "model/final_model_weights.pth")
+    torch.save(optimizer.state_dict(), "model/final_model_optimizer.pth")
+
+if __name__ == "__main__":
+    main()
