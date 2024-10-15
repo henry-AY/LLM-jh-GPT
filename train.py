@@ -211,12 +211,13 @@ checkpoint_path = "model/checkpoint.pth"
 
 model = BigramLanguageModel().to(device)
 optimizer = torch.optim.AdamW(model.parameters(), lr = learning_rate)
+model.train()
 
 # Load checkpoint if exists
 start_epoch, start_loss = load_checkpoint(checkpoint_path, model, optimizer)
 
 """ num epochs must be greater than the current epoch --> otherwise train.py will not run """
-num_epochs = 10
+num_epochs = 25
 
 for epoch in range(start_epoch, num_epochs):
     for iter in range(max_iters):
