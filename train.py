@@ -145,6 +145,8 @@ class BigramLanguageModel(nn.Module):
         self.ln_f = nn.LayerNorm(n_embd) # final layer norm
         self.lm_head = nn.Linear(n_embd, vocab_size)
 
+        self.epoch_count = 0
+
     def forward(self, idx, targets = None):
         B, T = idx.shape
 
@@ -182,8 +184,11 @@ class BigramLanguageModel(nn.Module):
             idx = torch.cat((idx, idx_next), dim = 1) # (B, T + 1)
         return idx
     
-    def epoch():
-        return epoch
+    def epoch(self):
+        return self.epoch_count
+    
+    def increment(self):
+        self.epoch_count += 1
 
 # Function to save checkpoint
 def save_checkpoint(model, optimizer, epoch, loss, path):

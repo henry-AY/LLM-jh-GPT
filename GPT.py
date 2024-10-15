@@ -32,7 +32,7 @@ def generate_token(token, max_tokens):
 output = generate_token("War and Peace", max_tokens=500)
 
 f = open('output.txt', 'a')
-# f.write('Epoch: ' + model.epoch + '\n')
+f.write('Epoch: ' + model.epoch() + '\n')
 f.write(output + '\n\n')
 f.close()
 
