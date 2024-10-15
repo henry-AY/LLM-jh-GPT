@@ -181,6 +181,9 @@ class BigramLanguageModel(nn.Module):
             # append sampled index to the running sequence
             idx = torch.cat((idx, idx_next), dim = 1) # (B, T + 1)
         return idx
+    
+    def epoch():
+        return epoch
 
 # Function to save checkpoint
 def save_checkpoint(model, optimizer, epoch, loss, path):
@@ -205,7 +208,6 @@ def load_checkpoint(path, model, optimizer):
     else:
         print("No checkpoint found. Training from scratch.")
         return 0, None
-
 
 checkpoint_path = "model/checkpoint.pth"
 
