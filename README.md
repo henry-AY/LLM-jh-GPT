@@ -91,3 +91,7 @@ The steps of the Linear Classifier and Softmax will be covered significantly mor
 The output from the final layer is converted into a predicted sequence using a linear layer followed by a softmax function to produce probabilities for each word in the vocabulary.
 
 During operation, the decoder adds the newly generated output to its existing input list and continues the decoding process. This iterative cycle continues until the model identifies a specific token that indicates the end of the sequence. The token with the highest probability is designated as the final output, commonly represented by the end token.
+
+## References
+
+<a href="https://github.com/karpathy/nanoGPT">nanoGPT</a> (Andrej Karpathy)
