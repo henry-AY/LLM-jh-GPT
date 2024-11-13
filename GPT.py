@@ -39,7 +39,7 @@ output = generate_token("War and Peace", max_tokens=500)
 
 #print GPT, and license
 print('jh-GPT: Mit license\nAuthors: henry-Ay, jgarc826\nhttps://github.com/henry-AY/LLM-jh-GPT')
-print(f'Random seed set to: {random_seed}\nEpoch: {curr_epoch}\n')
+print(f'\nRandom seed set to: {random_seed}\nEpoch: {curr_epoch}\n')
 
 f = open('output.txt', 'a')
 f.write(f'Output @ Epoch: {curr_epoch}\n{output}\n')
