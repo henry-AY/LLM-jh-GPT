@@ -6,7 +6,7 @@ A <ins>Generative Pre-trained Transformer</ins> (GPT) is a type of artificial in
 
 ## Transformer Architecture used in jhGPT
 <p align="center">
-  <img src="https://github.com/Hy8012/LLM-jh-GPT/blob/main/md_files/Transformer.png?raw=true" width="400" height="675"/>
+  <img src="readme_files/Transformer.png" width="400" height="675"/>
 </p>
 
 The picture above is the transformer architecture as described and depicted in <a href="https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf"><i>Attention Is All You Need</i></a>. In essence, a transformer is a type of artificial intelligence model that learns and analyzes patterns in heaps of data to generate new output. Transformers are a current cutting-edge natural language processing (NLP) model relying on a different type of encoder-decoder architecture. Previous encoder-decoder architectures relied mainly on Recurrent Neural Networks (RNNs), however, Transformers can entirely remove said recurrence.
@@ -15,7 +15,7 @@ The picture above is the transformer architecture as described and depicted in <
 
 The figure below (the left half of the transformer) is the Encoder.
 <p align="center">
-  <img src="https://github.com/Hy8012/LLM-jh-GPT/blob/main/md_files/Input_Transformer.png?raw=true" width="200" height="475"/>
+  <img src="readme_files/Input_Transformer.png" width="200" height="475"/>
 </p>
 
 #### Step 1 - Input Embeddings
@@ -61,7 +61,7 @@ The final encoder layer outputs a set of vectors, each representing a deep conte
 
 The figure below (the right half of the transformer) is the Decoder
 <p align="center">
-  <img src="https://github.com/Hy8012/LLM-jh-GPT/blob/main/md_files/Decoder_Transformer.png?raw=true" width="200" height="675"/>
+  <img src="readme_files/Decoder_Transformer.png" width="200" height="675"/>
 </p>
 
 The decoder in a Transformer model is responsible for generating text sequences and consists of sub-layers similar to the encoder, including two multi-headed attention layers, a pointwise feed-forward layer, residual connections, and layer normalization. Each multi-headed attention layer has a distinct function, and the decoding process concludes with a linear layer and softmax function to determine word probabilities.
@@ -81,7 +81,7 @@ After the embedding stage, the input is processed through a positional encoding 
 This process resembles the self-attention mechanism in the encoder, but with an important distinction: it restricts positions from attending to future positions. As a result, each word in the sequence remains uninfluenced by future tokens.
 
 <p align="center">
-  <img src="https://github.com/Hy8012/LLM-jh-GPT/blob/main/md_files/Masked_Scores.png?raw=true" width="650" height="200"/>
+  <img src="readme_files/Masked_Scores.png" width="650" height="200"/>
 </p>
 
 The steps of the Linear Classifier and Softmax will be covered significantly more in-depth in <i>Fundamentals of jh-GPT - A Deep-Dive into a Transformer-Based Language Model</i>
