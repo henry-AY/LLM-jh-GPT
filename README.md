@@ -1,4 +1,4 @@
-# LLM-jh-GPT
+# LLM-multilang-GPT
 
 > Author(s): Henry Yost (henry-AY), Jessy Garcia (jgarc826), Dmitry Sorokin (Dekamayaro)
 
